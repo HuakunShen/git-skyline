@@ -2,10 +2,19 @@
   "name": "git-skyline",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "build": "nx run-many -t build"
+  },
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "nx": "16.10.0",
+    "nx-cloud": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
-  }
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ]
 }

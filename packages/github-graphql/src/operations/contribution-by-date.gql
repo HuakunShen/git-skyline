@@ -1,0 +1,25 @@
+query GitHubContributionByDate($username: String!, $from: DateTime!, $to: DateTime!) {
+    user(login: $username) {
+        email
+        createdAt
+        contributionsCollection(
+            from: $from,
+            to: $to
+        ) {
+            contributionCalendar {
+                totalContributions
+                weeks {
+                    contributionDays {
+                        weekday
+                        date
+                        contributionCount
+                        color
+                        contributionLevel
+                    }
+                    firstDay
+                }
+                colors
+            }
+        }
+    }
+}

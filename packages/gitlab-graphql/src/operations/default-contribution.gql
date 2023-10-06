@@ -1,0 +1,18 @@
+query DefaultGitHubContribution($username: String!) {
+  user(login: $username) {
+    contributionsCollection {
+      contributionCalendar {
+        totalContributions
+        months {
+          totalWeeks
+        }
+        weeks {
+          contributionDays {
+            contributionCount
+            date
+          }
+        }
+      }
+    }
+  }
+}
