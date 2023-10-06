@@ -1,4 +1,4 @@
-export default function GitHubIcon({ className }: { className?: string }) {
+export function GitHubIcon({ className }: { className?: string }): JSX.Element {
   return (
     <svg
       className={className}

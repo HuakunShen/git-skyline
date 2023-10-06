@@ -1,5 +1,5 @@
 import Link from "next/link";
-import GitHubIcon from "./icons/github";
+import { GitHubIcon } from "ui";
 
 interface PropType {
   className?: string;
