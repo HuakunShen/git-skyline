@@ -20,6 +20,7 @@ export class GitHubAPI implements ContributionAPI {
     this.client = new GraphQLClient("https://api.github.com/graphql", {
       headers: {
         authorization: `Bearer ${token}`,
+        "User-Agent": "GitHub GraphQL SDK",
       },
     });
     // this.sdk = getSdk(client);
