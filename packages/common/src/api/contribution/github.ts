@@ -66,7 +66,7 @@ export class GitHubAPI implements ContributionAPI {
     endDate: Date
   ): Promise<GitHubContributionResult | undefined> {
     const response = await this.client.request(
-      DefaultGitHubContributionDocument,
+      GitHubContributionByDateDocument,
       { username, from: startDate.toISOString(), to: endDate.toISOString() }
     );
     // if (response.errors) {

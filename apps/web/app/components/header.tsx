@@ -1,4 +1,4 @@
-import GitHubIcon from "./icons/GitHub";
+import GitHubIcon from "./icons/github";
 
 interface PropType {
   className?: string;

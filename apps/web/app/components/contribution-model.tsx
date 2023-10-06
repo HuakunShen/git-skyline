@@ -1,11 +1,10 @@
 "use client";
-import { Canvas } from "@react-three/fiber";
-import { GitContribution } from "@git-skyline/common";
+import { type GitContribution } from "@git-skyline/common";
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
-import { useEffect } from "react";
-import { GLTFExporter } from "three/addons/exporters/GLTFExporter.js";
-import { STLExporter } from "three/addons/exporters/STLExporter.js";
+import { Canvas } from "@react-three/fiber";
+// import { GLTFExporter } from "three/addons/exporters/GLTFExporter.js";
+// import {GLTFExporter} from 'three/build/'
+// import { STLExporter } from "three/addons/exporters/STLExporter.js";
 
 function normalize(count: number, base = 4, offset = 2): number {
   switch (true) {
@@ -18,29 +17,29 @@ function normalize(count: number, base = 4, offset = 2): number {
   }
 }
 
-interface Props {
+interface PropType {
   data: GitContribution;
 }
 
-function save(blob: Blob, filename: string) {
+function save(blob: Blob, filename: string): void {
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
   link.download = filename;
   link.click();
 }
 
-function saveArrayBuffer(buffer: ArrayBuffer, filename: string) {
+function saveArrayBuffer(buffer: ArrayBuffer, filename: string): void {
   save(new Blob([buffer], { type: "application/octet-stream" }), filename);
 }
 
-function saveString(text: string, filename: string) {
+function saveString(text: string, filename: string): void {
   save(new Blob([text], { type: "text/plain" }), filename);
 }
 
-function Skyline({ data }: Props) {
+function Skyline({ data }: PropType): JSX.Element {
   const numRows = Math.floor(data.days.length / 7);
   const xOffset = (numRows * 12) / 2;
-  const scene = useThree((state) => state.scene);
+  // const scene = useThree((state) => state.scene);
   const yOffset = 0;
   //   useEffect(() => {
   //     console.log(scene);
@@ -70,20 +69,20 @@ function Skyline({ data }: Props) {
   //   }, [scene]);
   return (
     <>
-      {data.days.map((day, idx) => {
-        const height = normalize(day.count);
-
+      {data.days.map((dayData) => {
+        const height = normalize(dayData.count);
+        const { year, month, day } = dayData.date;
         return (
           <mesh
-            key={idx}
+            key={`${year}-${month}-${day}`}
             position={[
-              12 * day.week - xOffset,
+              12 * dayData.week - xOffset,
               height / 2 + yOffset,
-              day.weekday * 12,
+              dayData.weekday * 12,
             ]}
           >
             <boxGeometry args={[10, height, 10]} />
-            <meshStandardMaterial color={day.color} />
+            <meshStandardMaterial color={dayData.color} />
           </mesh>
         );
       })}
@@ -91,12 +90,12 @@ function Skyline({ data }: Props) {
   );
 }
 
-export default function ContributionModel({ data }: Props) {
+export default function ContributionModel({ data }: PropType): JSX.Element {
   return (
     <Canvas shadows>
       {/* <axesHelper args={[100]} /> */}
-      <PerspectiveCamera makeDefault position={[10, 400, 500]} fov={60}>
-        <OrbitControls enableDamping autoRotate={false} autoRotateSpeed={0.5} />
+      <PerspectiveCamera fov={60} makeDefault position={[10, 400, 500]}>
+        <OrbitControls autoRotate={false} autoRotateSpeed={0.5} enableDamping />
       </PerspectiveCamera>
       {/* <ambientLight intensity={0.4} color="#fff" /> */}
 

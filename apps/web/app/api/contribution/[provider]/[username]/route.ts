@@ -1,4 +1,4 @@
-import { type NextRequest } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { GitProvider, type GitContribution } from "@git-skyline/common";
 import { contributionRetrieverFactory } from "../../../../lib/contribution";
@@ -52,5 +52,5 @@ export async function GET(
     return new Response("Not found", { status: 404 });
   }
 
-  return Response.json(data);
+  return NextResponse.json(data);
 }

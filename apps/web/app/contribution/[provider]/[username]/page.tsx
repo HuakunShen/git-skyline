@@ -2,7 +2,7 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { GitContribution, GitProvider } from "@git-skyline/common";
-import ContributionModel from "../../../components/ContributionModel";
+import ContributionModel from "../../../components/contribution-model";
 
 interface PropType {
   params: { provider: string; username: string };
@@ -35,8 +35,6 @@ export default function Page({ params }: PropType): JSX.Element {
     fetch(url)
       .then((res) => res.json())
       .then((data: GitContribution) => {
-        console.log(data);
-        
         setContributionData(GitContribution.parse(data));
       })
       .catch((err) => {
