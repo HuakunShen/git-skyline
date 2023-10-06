@@ -11,7 +11,7 @@ export default function Footer(props: PropType) {
       <div className="flex justify-between">
         <p>
           Made with 🤍 by
-          <Link href="https://github.com/HuakunShen">Huakun</Link>
+          <Link href="https://github.com/HuakunShen"> Huakun</Link>
         </p>
         <p>
           <Link

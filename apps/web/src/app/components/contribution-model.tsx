@@ -95,7 +95,7 @@ export default function ContributionModel({ data }: PropType): JSX.Element {
     <Canvas shadows>
       {/* <axesHelper args={[100]} /> */}
       <PerspectiveCamera fov={60} makeDefault position={[10, 400, 500]}>
-        <OrbitControls autoRotate={false} autoRotateSpeed={0.5} enableDamping />
+        <OrbitControls autoRotate={true} autoRotateSpeed={0.5} enableDamping />
       </PerspectiveCamera>
       {/* <ambientLight intensity={0.4} color="#fff" /> */}
 
