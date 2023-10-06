@@ -1,6 +1,6 @@
-import { ContributionAdapter } from "~/adapter/contribution";
-import { ContributionAPI } from "~/api";
-import { GitContribution } from "~/types";
+import { ContributionAdapter } from "../adapter/contribution";
+import { ContributionAPI } from "../api";
+import { GitContribution } from "../types";
 
 export class ContributionRetriever {
   private adapter: ContributionAdapter;

@@ -2,7 +2,7 @@ import { z } from "zod";
 import { ContributionAdapter } from "./base";
 import { GitContribution, GitProvider, GitDayContribution } from "../../types";
 import { ContributionCalendarWeek } from "@git-skyline/github-graphql";
-import { GitHubContributionResult } from "~/api/contribution/github";
+import { GitHubContributionResult } from "../../api/contribution/github";
 
 export class GitHubContributionAdapter extends ContributionAdapter {
   transform(data: GitHubContributionResult): GitContribution {

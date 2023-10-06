@@ -15,20 +15,20 @@ const config: CodegenConfig = {
 
   documents: "src/operations/**/*.gql",
   generates: {
-    // "src/gql/": {
-    //   preset: "client",
-    //   plugins: [],
-    // },
-    "src/gql/request.ts": {
-      plugins: [
-        "typescript",
-        "typescript-operations",
-        "typescript-graphql-request",
-      ],
-      config: {
-        rawRequest: true,
-      },
+    "src/gql/": {
+      preset: "client",
+      plugins: [],
     },
+    // "src/gql/request.ts": {
+    //   plugins: [
+    //     "typescript",
+    //     "typescript-operations",
+    //     "typescript-graphql-request",
+    //   ],
+    //   config: {
+    //     rawRequest: true,
+    //   },
+    // },
   },
 };
 

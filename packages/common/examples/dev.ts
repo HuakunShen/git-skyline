@@ -1,7 +1,7 @@
 // Run this file with `bun examples/dev.ts`
-import { GitHubAPI } from "~/api";
-import { GitHubContributionAdapter } from "~/adapter/contribution/github";
-import { ContributionRetriever } from "~/retriever";
+import { GitHubAPI } from "../src/api";
+import { GitHubContributionAdapter } from "../src/adapter/contribution/github";
+import { ContributionRetriever } from "../src/retriever";
 import { z } from "zod";
 
 const github_token = z.string().parse(process.env.GITHUB_API_TOKEN);
