@@ -1,20 +1,21 @@
 {
   "name": "git-skyline",
-  "module": "index.ts",
-  "type": "module",
+  "private": true,
   "scripts": {
-    "build": "nx run-many -t build"
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "bun-types": "latest",
-    "nx": "16.10.0",
-    "nx-cloud": "latest"
+    "eslint": "^8.48.0",
+    "prettier": "^3.0.3",
+    "tsconfig": "*",
+    "turbo": "latest"
   },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
+  "packageManager": "bun@1.0.4",
   "workspaces": [
-    "packages/*",
-    "apps/*"
+    "apps/*",
+    "packages/*"
   ]
 }
