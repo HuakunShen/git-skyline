@@ -25,36 +25,41 @@ export async function GET(
     : undefined;
 
   // parse startdate and enddate
-  const startDateParam = searchParams.get("startDate");
-  const endDateParam = searchParams.get("endDate");
-  const startDate = startDateParam
-    ? z
-        .string()
-        .transform((v) => new Date(v))
-        .parse(startDateParam)
-    : undefined;
-  const endDate = endDateParam
-    ? z
-        .string()
-        .transform((v) => new Date(v))
-        .parse(endDateParam)
-    : undefined;
-
+  // const startDateParam = searchParams.get("startDate");
+  // const endDateParam = searchParams.get("endDate");
+  // const startDate = startDateParam
+  //   ? z
+  //       .string()
+  //       .transform((v) => new Date(v))
+  //       .parse(startDateParam)
+  //   : undefined;
+  // const endDate = endDateParam
+  //   ? z
+  //       .string()
+  //       .transform((v) => new Date(v))
+  //       .parse(endDateParam)
+  //   : undefined;
+  const startDate = undefined;
+  const endDate = undefined;
   const contributionRetriever = contributionRetrieverFactory(provider);
   let data: GitContribution | undefined;
+  // console.log("start retrieving");
+  // const data = await contributionRetriever.getContributionsByYear(username, year!);;
   if (year) {
     data = await contributionRetriever.getContributionsByYear(username, year);
   } else if (startDate && endDate) {
-    data = await contributionRetriever.getContributionsByDate(
-      username,
-      startDate,
-      endDate
-    );
+    // data = await contributionRetriever.getContributionsByDate(
+    //   username,
+    // startDate,
+    // endDate
+    // );
   } else {
     data = await contributionRetriever.getContributions(username);
   }
   if (!data) {
     return new Response("Not found", { status: 404 });
   }
+  console.log("start retrieving");
+
   return Response.json(data);
 }

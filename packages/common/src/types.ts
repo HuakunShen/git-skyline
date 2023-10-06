@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ContributionLevel as ContributionLevelCodegen } from "@git-skyline/github-graphql";
+import { ContributionLevel as ContributionLevelCodegen } from "@git-skyline/github-graphql/src/gql/graphql";
 
 export const GitProvider = z.enum(["github"]);
 export type GitProvider = z.infer<typeof GitProvider>;

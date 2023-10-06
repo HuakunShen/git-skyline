@@ -3,7 +3,7 @@ import {
   ContributionCalendar,
   DefaultGitHubContributionDocument,
   GitHubContributionByDateDocument,
-} from "@git-skyline/github-graphql";
+} from "@git-skyline/github-graphql/src/gql/graphql";
 // import { getSdk, ContributionCalendar } from "@git-skyline/github-graphql";
 import { ContributionAPI } from "./base";
 
