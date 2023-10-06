@@ -21,7 +21,7 @@
     "typescript": "^5.0.0"
   },
   "devDependencies": {
-    "@git-skyline/github-graphql": "workspace:*",
+    "@git-skyline/github-graphql": "*",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
