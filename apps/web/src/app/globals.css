@@ -18,6 +18,12 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: rgb(13,4,167);
-background: linear-gradient(141deg, rgba(13,4,167,1) 0%, rgba(4,4,14,1) 20%, rgba(27,5,26,1) 86%, rgba(113,23,106,1) 100%);
+  background: rgb(10, 3, 134);
+  background: linear-gradient(
+    141deg,
+    rgba(10, 3, 134, 1) 0%,
+    rgba(16, 16, 74, 1) 20%,
+    rgba(46, 9, 44, 1) 86%,
+    rgba(92, 15, 86, 1) 100%
+  );
 }

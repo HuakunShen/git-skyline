@@ -72,6 +72,8 @@ export default function ContributionModel({ data }: PropType): JSX.Element {
       {/* <ambientLight intensity={0.4} color="#fff" /> */}
 
       <directionalLight color="#fff" position={[0, 200, 200]} />
+      <directionalLight color="#fff" position={[-100, 100, 100]} />
+      <directionalLight color="#fff" position={[200, 100, 100]} />
       <directionalLight color="#fff" position={[0, 200, -200]} />
       <Skyline data={data} />
     </Canvas>
