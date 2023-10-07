@@ -46,7 +46,7 @@ export default function Home(): JSX.Element {
               <input
                 className="input input-bordered join-item border border-secondary rounded-l-full w-32"
                 onChange={(e) => {
-                  userInputStore.setUsername(e.target.value);
+                  userInputStore.setUsername(e.target.value.trim());
                 }}
                 placeholder="@github_username"
                 value={userInputStore.username}
