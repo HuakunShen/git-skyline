@@ -1,9 +1,11 @@
-import { type NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { GitProvider, type GitContribution } from "@git-skyline/common";
 import { contributionRetrieverFactory } from "../../../../lib/contribution";
+import { ApolloError } from "@apollo/client";
 
-export async function GET(
+export function GET(
+
   request: NextRequest,
   { params }: { params: { username: string; provider: string } }
 ): Promise<Response> {
@@ -36,21 +38,37 @@ export async function GET(
   // const startDate = undefined;
   // const endDate = undefined;
   const contributionRetriever = contributionRetrieverFactory(provider);
-  let data: GitContribution | undefined;
+  let dataFetchPromise: Promise<GitContribution | undefined>;
   if (year) {
-    data = await contributionRetriever.getContributionsByYear(username, year);
+    dataFetchPromise = contributionRetriever.getContributionsByYear(
+      username,
+      year
+    );
   } else if (startDate && endDate) {
-    data = await contributionRetriever.getContributionsByDate(
+    dataFetchPromise = contributionRetriever.getContributionsByDate(
+
       username,
       startDate,
       endDate
     );
   } else {
-    data = await contributionRetriever.getContributions(username);
+    dataFetchPromise = contributionRetriever.getContributions(username);
   }
-  if (!data) {
-    return new Response("Not found", { status: 404 });
-  }
+  return dataFetchPromise
+    .then((data) => {
+      if (!data) {
+        return new Response("Not found", { status: 404 });
+      }
+      return NextResponse.json(data);
+    })
+    .catch((err) => {
+      // check if error is ApolloErrror
 
-  return NextResponse.json(data);
+      if (err instanceof ApolloError) {
+        return new Response(err.message, { status: 400 });
+      } else {
+        return new Response(err.message, { status: 400 });
+      }
+    });
+
 }

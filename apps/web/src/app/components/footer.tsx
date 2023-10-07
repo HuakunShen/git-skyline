@@ -10,7 +10,7 @@ export default function Footer(props: PropType) {
     <div className="px-10 pb-5 font-mono">
       <div className="flex justify-between">
         <p>
-          Made with 🤍 by
+          Made with 🤍 by{" "}
           <Link href="https://github.com/HuakunShen">Huakun</Link>
         </p>
         <p>
