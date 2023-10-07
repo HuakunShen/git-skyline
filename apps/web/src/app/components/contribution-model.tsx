@@ -8,6 +8,7 @@ import { STLExporter } from "three/addons/exporters/STLExporter.js";
 import { useSceneStore } from "@/app/lib/store";
 // import {GLTFExporter} from 'three/build/'
 
+
 function normalize(count: number, base = 4, offset = 2): number {
   switch (true) {
     case count === 0:
@@ -37,6 +38,7 @@ function Skyline({ data }: PropType): JSX.Element {
   useEffect(() => {
     sceneStore.setScene(scene.clone());
   }, [scene]);
+
   return (
     <>
       {data.days.map((dayData) => {

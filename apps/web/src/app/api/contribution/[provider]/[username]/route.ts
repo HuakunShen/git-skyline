@@ -5,6 +5,7 @@ import { contributionRetrieverFactory } from "../../../../lib/contribution";
 import { ApolloError } from "@apollo/client";
 
 export function GET(
+
   request: NextRequest,
   { params }: { params: { username: string; provider: string } }
 ): Promise<Response> {
@@ -45,6 +46,7 @@ export function GET(
     );
   } else if (startDate && endDate) {
     dataFetchPromise = contributionRetriever.getContributionsByDate(
+
       username,
       startDate,
       endDate
@@ -68,4 +70,5 @@ export function GET(
         return new Response(err.message, { status: 400 });
       }
     });
+
 }

@@ -4,6 +4,7 @@ import { GitProvider } from "@git-skyline/common";
 import { range } from "./lib/utils";
 import { useUserInputStore } from "@/app/lib/store";
 
+
 export default function Home(): JSX.Element {
   const router = useRouter();
   const now = new Date();
@@ -12,12 +13,14 @@ export default function Home(): JSX.Element {
 
   function go(): void {
     if (!userInputStore.username) {
+
       // alert("Please enter a GitHub username");
       return;
     }
 
     router.push(
       `/contribution/${GitProvider.Enum.github}/${userInputStore.username}?year=${userInputStore.year}`
+
     );
   }
 
@@ -25,6 +28,7 @@ export default function Home(): JSX.Element {
     <main className="h-full flex justify-center items-center ">
       <div className="flex flex-col items-center space-y-8 px-5">
         <h1 className="text-5xl font-bold bg-gradient-to-r to-danger bg-clip-text text-transparent from-indigo-500 via-purple-500 to-pink-500">Your GitHub Story in 3D</h1>
+
 
         <p className="text-lg">
           View a 3D model of your GitHub contribution graph. Share it, print it,
@@ -46,6 +50,7 @@ export default function Home(): JSX.Element {
                 }}
                 placeholder="@github_username"
                 value={userInputStore.username}
+
               />
             </div>
           </div>
@@ -55,6 +60,7 @@ export default function Home(): JSX.Element {
               userInputStore.setYear(parseInt(e.target.value));
             }}
             value={userInputStore.year}
+
           >
             {years.map((year) => (
               <option key={year}>{year}</option>
@@ -66,6 +72,7 @@ export default function Home(): JSX.Element {
             type="submit"
           >
             Skyline
+
           </button>
         </form>
       </div>
