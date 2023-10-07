@@ -25,7 +25,7 @@ export default function Home(): JSX.Element {
   return (
     <main className="h-full flex justify-center items-center ">
       <div className="flex flex-col items-center space-y-8">
-        <h1 className="text-5xl font-bold">Your GitHub Story in 3D</h1>
+        <h1 className="text-5xl font-bold bg-gradient-to-r to-danger bg-clip-text text-transparent from-indigo-500 via-purple-500 to-pink-500">Your GitHub Story in 3D</h1>
 
         <p className="text-lg">
           View a 3D model of your GitHub contribution graph. Share it, print it,
@@ -41,7 +41,7 @@ export default function Home(): JSX.Element {
           <div>
             <div>
               <input
-                className="input input-bordered join-item border border-secondary"
+                className="input input-bordered join-item border border-secondary rounded-l-full"
                 onChange={(e) => {
                   userInputStore.setUsername(e.target.value);
                 }}
