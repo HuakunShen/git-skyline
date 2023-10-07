@@ -1,10 +1,12 @@
 "use client";
 import { type GitContribution } from "@git-skyline/common";
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-// import { GLTFExporter } from "three/addons/exporters/GLTFExporter.js";
+import { Canvas, useThree } from "@react-three/fiber";
+import { useEffect } from "react";
+import { GLTFExporter } from "three/addons/exporters/GLTFExporter.js";
+import { STLExporter } from "three/addons/exporters/STLExporter.js";
+import { useSceneStore } from "@/app/lib/store";
 // import {GLTFExporter} from 'three/build/'
-// import { STLExporter } from "three/addons/exporters/STLExporter.js";
 
 function normalize(count: number, base = 4, offset = 2): number {
   switch (true) {
@@ -21,52 +23,20 @@ interface PropType {
   data: GitContribution;
 }
 
-function save(blob: Blob, filename: string): void {
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = filename;
-  link.click();
-}
-
-function saveArrayBuffer(buffer: ArrayBuffer, filename: string): void {
-  save(new Blob([buffer], { type: "application/octet-stream" }), filename);
-}
-
-function saveString(text: string, filename: string): void {
-  save(new Blob([text], { type: "text/plain" }), filename);
-}
-
 function Skyline({ data }: PropType): JSX.Element {
+  const sceneStore = useSceneStore();
   const numRows = Math.floor(data.days.length / 7);
   const xOffset = (numRows * 12) / 2;
-  // const scene = useThree((state) => state.scene);
+  const scene = useThree((state) => state.scene);
+
   const yOffset = 0;
-  //   useEffect(() => {
-  //     console.log(scene);
-  //     const exporter = new GLTFExporter();
-  //     exporter.parse(
-  //       scene,
-  //       (gltf) => {
-  //         console.log(gltf);
-  //         if (gltf instanceof ArrayBuffer) {
-  //           saveArrayBuffer(gltf, "scene.glb");
-  //         } else {
-  //           const output = JSON.stringify(gltf, null, 2);
-  //           console.log(output);
-  //           saveString(output, "scene.gltf");
-  //         }
-  //       },
-  //       function (error) {
-  //         console.log(error);
-  //       },
-  //       {
-  //         trs: true,
-  //         onlyVisible: true,
-  //         binary: false,
-  //         maxTextureSize: 4096,
-  //       }
-  //     );
-  //   }, [scene]);
+  // useEffect(() => {
+  //   const exporter = new GLTFExporter();
+
+  // }, [scene]);
+  useEffect(() => {
+    sceneStore.setScene(scene.clone());
+  }, [scene]);
   return (
     <>
       {data.days.map((dayData) => {

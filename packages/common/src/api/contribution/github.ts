@@ -25,7 +25,7 @@ export class GitHubAPI implements ContributionAPI {
       link: new HttpLink({
         uri: "https://api.github.com/graphql",
         headers: {
-          authorization: `Bearer ${process.env.GITHUB_API_TOKEN}`,
+          authorization: `Bearer ${token}`,
           "User-Agent": "git-skyline",
         },
       }),

@@ -1,24 +1,24 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GitProvider } from "@git-skyline/common";
 import { range } from "./lib/utils";
+import { useUserInputStore } from "@/app/lib/store";
 
 export default function Home(): JSX.Element {
   const router = useRouter();
   const now = new Date();
   const years = range(2008, now.getFullYear()).reverse();
-  const [selectedYear, setSelectedYear] = useState<number>(years[0]);
-  const [username, setUsername] = useState("");
+  const userInputStore = useUserInputStore();
 
   function go(): void {
-    if (!username) {
+    if (!userInputStore.username) {
       // alert("Please enter a GitHub username");
       return;
     }
 
     router.push(
-      `/contribution/${GitProvider.Enum.github}/${username}?year=${selectedYear}`
+      `/contribution/${GitProvider.Enum.github}/${userInputStore.username}?year=${userInputStore.year}`
     );
   }
 
@@ -26,6 +26,7 @@ export default function Home(): JSX.Element {
     <main className="h-full flex justify-center items-center ">
       <div className="flex flex-col items-center space-y-8">
         <h1 className="text-5xl font-bold">Your GitHub Story in 3D</h1>
+
         <p className="text-lg">
           View a 3D model of your GitHub contribution graph. Share it, print it,
           and more!
@@ -42,19 +43,19 @@ export default function Home(): JSX.Element {
               <input
                 className="input input-bordered join-item border border-secondary"
                 onChange={(e) => {
-                  setUsername(e.target.value);
+                  userInputStore.setUsername(e.target.value);
                 }}
                 placeholder="@github_username"
-                value={username}
+                value={userInputStore.username}
               />
             </div>
           </div>
           <select
             className="select select-bordered join-item border border-secondary"
             onChange={(e) => {
-              setSelectedYear(parseInt(e.target.value));
+              userInputStore.setYear(parseInt(e.target.value));
             }}
-            value={selectedYear}
+            value={userInputStore.year}
           >
             {years.map((year) => (
               <option key={year}>{year}</option>
