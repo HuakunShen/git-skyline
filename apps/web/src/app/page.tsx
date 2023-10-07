@@ -1,6 +1,5 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import { GitProvider } from "@git-skyline/common";
 import { range } from "./lib/utils";
 import { useUserInputStore } from "@/app/lib/store";
@@ -24,7 +23,7 @@ export default function Home(): JSX.Element {
 
   return (
     <main className="h-full flex justify-center items-center ">
-      <div className="flex flex-col items-center space-y-8">
+      <div className="flex flex-col items-center space-y-8 px-5">
         <h1 className="text-5xl font-bold bg-gradient-to-r to-danger bg-clip-text text-transparent from-indigo-500 via-purple-500 to-pink-500">Your GitHub Story in 3D</h1>
 
         <p className="text-lg">
@@ -41,7 +40,7 @@ export default function Home(): JSX.Element {
           <div>
             <div>
               <input
-                className="input input-bordered join-item border border-secondary rounded-l-full"
+                className="input input-bordered join-item border border-secondary rounded-l-full w-32"
                 onChange={(e) => {
                   userInputStore.setUsername(e.target.value);
                 }}
@@ -66,7 +65,7 @@ export default function Home(): JSX.Element {
             onClick={go}
             type="submit"
           >
-            Create a Skyline
+            Skyline
           </button>
         </form>
       </div>
