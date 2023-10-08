@@ -5,6 +5,7 @@ import { range } from "./lib/utils";
 import { useUserInputStore } from "@/app/lib/store";
 import DefaultLayout from "@/app/components/layouts/default";
 
+
 export default function Home(): JSX.Element {
   const router = useRouter();
   const now = new Date();

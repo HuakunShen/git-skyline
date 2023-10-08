@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useSceneStore } from "@/app/lib/store";
 import { useSearchParams } from "next/navigation";
 
+
 function normalize(count: number, base = 4, offset = 2): number {
   switch (true) {
     case count === 0:
