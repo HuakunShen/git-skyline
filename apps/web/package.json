@@ -1,6 +1,5 @@
 {
   "name": "@git-skyline/web",
-
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -19,6 +18,7 @@
     "daisyui": "^3.9.2",
     "graphql": "^16.8.1",
     "next": "13.5.4",
+    "node-cache": "^5.1.2",
     "react": "^18",
     "react-dom": "^18",
     "three": "^0.157.0",

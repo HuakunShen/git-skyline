@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { Scene } from "three";
+import { GitContribution } from "@git-skyline/common";
 
 const now = new Date();
 
@@ -10,13 +11,6 @@ export type State = {
   setUsername: (username: string) => void;
   setYear: (year: number) => void;
 };
-
-export const useUserInputStore1 = create<State>((set) => ({
-  username: "",
-  year: now.getFullYear(),
-  setUsername: (username: string) => set((state) => ({ username })),
-  setYear: (year: number) => set((state) => ({ year })),
-}));
 
 export const useUserInputStore = create<State, [["zustand/persist", unknown]]>(
   persist(
@@ -33,8 +27,6 @@ export const useUserInputStore = create<State, [["zustand/persist", unknown]]>(
   )
 );
 
-type SceneType = ArrayBuffer | string | null;
-
 export type SceneState = {
   // gltfSceneContent: SceneType;
   scene: Scene | null;
@@ -49,3 +41,38 @@ export const useSceneStore = create<SceneState>((set) => ({
   // setGltfSceneContent: (scene: SceneType) =>
   //   set((state) => ({ gltfSceneContent: scene })),
 }));
+
+export type ContributionCacheState = {
+  contributions: GitContribution | null;
+  fetchDate: Date | null;
+  url: string;
+  setContributions: (contributions: GitContribution) => void;
+  setFetchDate: (date: Date) => void;
+  setUrl: (url: string) => void;
+};
+
+export const useContributionsStore = create<
+  ContributionCacheState,
+  [["zustand/persist", unknown]]
+>(
+  persist(
+    (set, get) => ({
+      contributions: null,
+      fetchDate: null,
+      url: "",
+      setContributions: (contributions: GitContribution) => {
+        set({ contributions });
+      },
+      setFetchDate: (date: Date) => {
+        set({ fetchDate: date });
+      },
+      setUrl: (url: string) => {
+        set({ url });
+      },
+    }),
+    {
+      name: "contributions-cache-store",
+      storage: createJSONStorage(() => localStorage),
+    }
+  )
+);

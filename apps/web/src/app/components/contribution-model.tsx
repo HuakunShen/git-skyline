@@ -1,13 +1,11 @@
 "use client";
+// This file is only responsible for rendering the 3D model, data should be passed in as props
 import { type GitContribution } from "@git-skyline/common";
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import { Canvas, useThree } from "@react-three/fiber";
 import { useEffect } from "react";
-import { GLTFExporter } from "three/addons/exporters/GLTFExporter.js";
-import { STLExporter } from "three/addons/exporters/STLExporter.js";
 import { useSceneStore } from "@/app/lib/store";
-// import {GLTFExporter} from 'three/build/'
-
+import { useSearchParams } from "next/navigation";
 
 function normalize(count: number, base = 4, offset = 2): number {
   switch (true) {
@@ -63,14 +61,30 @@ function Skyline({ data }: PropType): JSX.Element {
 }
 
 export default function ContributionModel({ data }: PropType): JSX.Element {
+  const searchParams = useSearchParams();
+  const enableZoom = searchParams.get("enableZoom") === "false" ? false : true; // default to true
+  const enablePan = searchParams.get("enablePan") === "false" ? false : true; // default to true
+  const enableDamping =
+    searchParams.get("enableDamping") === "false" ? false : true; // default to true
+  const autoRotate = searchParams.get("autoRotate");
+  const autoRotateSpeed = searchParams.get("autoRotateSpeed");
+  const parsedAutoRotateSpeed = autoRotateSpeed
+    ? parseFloat(autoRotateSpeed)
+    : 0.5;
+  const parsedAutoRotate =
+    autoRotate && parsedAutoRotateSpeed ? autoRotate === "false" : true;
+
   return (
     <Canvas shadows>
-      {/* <axesHelper args={[100]} /> */}
       <PerspectiveCamera fov={60} makeDefault position={[10, 400, 500]}>
-        <OrbitControls autoRotate={true} autoRotateSpeed={0.5} enableDamping />
+        <OrbitControls
+          autoRotate={parsedAutoRotate}
+          autoRotateSpeed={parsedAutoRotateSpeed}
+          enableZoom={enableZoom}
+          enablePan={enablePan}
+          enableDamping={enableDamping}
+        />
       </PerspectiveCamera>
-      {/* <ambientLight intensity={0.4} color="#fff" /> */}
-
       <directionalLight color="#fff" position={[0, 200, 200]} />
       <directionalLight color="#fff" position={[-100, 100, 100]} />
       <directionalLight color="#fff" position={[200, 100, 100]} />
