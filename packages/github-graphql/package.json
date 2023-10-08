@@ -1,6 +1,7 @@
 {
   "name": "@git-skyline/github-graphql",
   "module": "index.ts",
+  "version": "0.0.2",
   "type": "module",
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.0",

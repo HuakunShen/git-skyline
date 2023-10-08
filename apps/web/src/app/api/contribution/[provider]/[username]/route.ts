@@ -3,9 +3,9 @@ import { z } from "zod";
 import { GitProvider, type GitContribution } from "@git-skyline/common";
 import { contributionRetrieverFactory } from "../../../../lib/contribution";
 import { ApolloError } from "@apollo/client";
+import { contributionCache } from "@/app/lib/cache";
 
 export function GET(
-
   request: NextRequest,
   { params }: { params: { username: string; provider: string } }
 ): Promise<Response> {
@@ -21,44 +21,57 @@ export function GET(
     : undefined;
 
   // parse startdate and enddate
-  const startDateParam = searchParams.get("startDate");
-  const endDateParam = searchParams.get("endDate");
-  const startDate = startDateParam
-    ? z
-        .string()
-        .transform((v) => new Date(v))
-        .parse(startDateParam)
-    : undefined;
-  const endDate = endDateParam
-    ? z
-        .string()
-        .transform((v) => new Date(v))
-        .parse(endDateParam)
-    : undefined;
-  // const startDate = undefined;
-  // const endDate = undefined;
+  // const startDateParam = searchParams.get("startDate");
+  // const endDateParam = searchParams.get("endDate");
+  // const startDate = startDateParam
+  //   ? z
+  //       .string()
+  //       .transform((v) => new Date(v))
+  //       .parse(startDateParam)
+  //   : undefined;
+  // const endDate = endDateParam
+  //   ? z
+  //       .string()
+  //       .transform((v) => new Date(v))
+  //       .parse(endDateParam)
+  //   : undefined;
+
   const contributionRetriever = contributionRetrieverFactory(provider);
   let dataFetchPromise: Promise<GitContribution | undefined>;
   if (year) {
-    dataFetchPromise = contributionRetriever.getContributionsByYear(
-      username,
-      year
-    );
-  } else if (startDate && endDate) {
-    dataFetchPromise = contributionRetriever.getContributionsByDate(
-
-      username,
-      startDate,
-      endDate
-    );
+    const cacheVal = contributionCache.get(`${provider}/${username}/${year}`);
+    if (cacheVal) {
+      dataFetchPromise = new Promise((resolve) => {
+        resolve(cacheVal as GitContribution);
+      });
+    } else {
+      dataFetchPromise = contributionRetriever.getContributionsByYear(
+        username,
+        year
+      );
+    }
+    // } else if (startDate && endDate) {
+    //   dataFetchPromise = contributionRetriever.getContributionsByDate(
+    //     username,
+    //     startDate,
+    //     endDate
+    //   );
   } else {
-    dataFetchPromise = contributionRetriever.getContributions(username);
+    const cacheVal = contributionCache.get(`${provider}/${username}`);
+    if (cacheVal) {
+      dataFetchPromise = new Promise((resolve) => {
+        resolve(cacheVal as GitContribution);
+      });
+    } else {
+      dataFetchPromise = contributionRetriever.getContributions(username);
+    }
   }
   return dataFetchPromise
     .then((data) => {
       if (!data) {
         return new Response("Not found", { status: 404 });
       }
+      contributionCache.set(`${provider}-${username}-${year}`, data);
       return NextResponse.json(data);
     })
     .catch((err) => {
@@ -70,5 +83,4 @@ export function GET(
         return new Response(err.message, { status: 400 });
       }
     });
-
 }
