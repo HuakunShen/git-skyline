@@ -17,8 +17,8 @@ export function contributionRetrieverFactory(
   let adapter: ContributionAdapter;
   switch (gitProvider) {
     case GitProvider.Enum.github:
-      if (!token) throw new Error("GITHUB_API_TOKEN is not set");
-      api = new GitHubAPI(token);
+      if (!sysToken) throw new Error("GITHUB_API_TOKEN is not set");
+      api = new GitHubAPI(sysToken);
       adapter = new GitHubContributionAdapter();
       return new ContributionRetriever(api, adapter);
     default:
