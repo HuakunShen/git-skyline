@@ -8,9 +8,11 @@ import {
 } from "@git-skyline/common";
 
 export function contributionRetrieverFactory(
-  gitProvider: GitProvider
+  gitProvider: GitProvider,
+  token: string | null
 ): ContributionRetriever {
-  const token = process.env.GITHUB_API_TOKEN;
+  let sysToken = process.env.GITHUB_API_TOKEN;
+  if (token) sysToken = token; // user may passa in their own token
   let api: ContributionAPI;
   let adapter: ContributionAdapter;
   switch (gitProvider) {

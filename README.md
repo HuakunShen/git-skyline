@@ -1,81 +1,68 @@
-# Turborepo starter
+# Git-Skyline
 
-This is an official starter Turborepo.
+> The official GitHub Skyline web app https://skyline.github.com/ stops working. Keeps saying "cannot find user".
+>
+> So I decided to make a clone of this project.
 
-## Using this example
+![demo img](./README.assets/git-skyline-demo.png)
 
-Run the following command:
+## Features
 
-```sh
-npx create-turbo@latest
+- [x] 3D model
+- [x] Contribution Year
+- [x] Embed with `iframe`
+- [x] Provide your own API Token
+- [ ] Contribution by Date (given a start date and an end date)
+- [ ] Git Providers
+  - [x] GitHub
+  - [ ] GitLab
+  - [ ] Gitee
+
+I thought about supporting other git providers like GitLab... But personally I only use GitHub.
+If there are more people requesting support for other platforms, I will consider implementing it.
+Feel free to send a PR for new features if you are willing to contribute.
+
+### Embed Page
+
+You can embed git-skyline webpage into your own web page using `iframe`, without the header/footer on the page, and options to disable zoom, pan, auto-rotate.
+
+Click on the "Embed Page" button, it will take you to another web page with the 3D model alone. Put the url in an iframe.
+
+```html
+<iframe
+  src="https://git-skyline.huakun.tech/contribution/github/huakunshen/embed?year=2023&enableZoom=false"
+  width="100%"
+  height="100%"
+  frameborder="0"
+></iframe>
 ```
 
-## What's inside?
+#### Options
 
-This Turborepo includes the following packages/apps:
+The model by default enables auto-rotate, damping, panning, zoom interations. Sometimes you may not want these interactions on your web page.
 
-### Apps and Packages
+You can simply add search params into the url
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+e.g. `?enableZoom=false&enableZoom=false&enablePan=false&enableDamping=false&autoRotate=false&autoRotateSpeed=1`
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+See [source code](./apps/web/src/app/components/contribution-model.tsx) for how the search parameters are used.
 
-### Utilities
+#### Custom API Token
 
-This Turborepo has some additional tools already setup for you:
+GitHub API requires API token, I am using my own token on server. To reduce cost and avoid flooding GitHub API (I may be banned), I implemented some simple in-memory caching to keep data in memory for ~1-2 days.
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+But it's possible for my API Token to be banned by GitHub due to massive amount of request.
 
-### Build
+In that case, if you are embeding this web app in your web page, you can provide your own GitHub token to avoid service down by adding the token in search params
 
-To build all apps and packages, run the following command:
+e.g. `&token=github_pat_<123456>`
 
-```
-cd my-turborepo
-pnpm build
-```
+Generate a GitHub API token at https://github.com/settings/tokens.
 
-### Develop
+Use a fine-grained token without any extra permission.
 
-To develop all apps and packages, run the following command:
+## Disclaimer
 
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+> This project is still in development, and may not be stable (in terms of up time and API). If you want a stable service, consider deploying your own. I didn't spend money for cache service, so it's technically possible that the app could crash due to memory overflow if too many people are using it.
+>
+> I will consider scaling up the service in the future if necessary.

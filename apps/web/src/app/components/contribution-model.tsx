@@ -73,7 +73,7 @@ export default function ContributionModel({ data }: PropType): JSX.Element {
     ? parseFloat(autoRotateSpeed)
     : 0.5;
   const parsedAutoRotate =
-    autoRotate && parsedAutoRotateSpeed ? autoRotate === "false" : true;
+    autoRotate && parsedAutoRotateSpeed ? autoRotate !== "false" : true;
 
   return (
     <Canvas shadows>

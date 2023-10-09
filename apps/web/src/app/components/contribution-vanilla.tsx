@@ -29,6 +29,7 @@ export default function PageInner({
   const contributionStore = useContributionsStore();
 
   const year = searchParams.get("year");
+  const token = searchParams.get("token"); // client enter own API token
   // const contributionRetriever = contributionRetrieverFactory(params.provider);
   const [contributionData, setContributionData] =
     useState<null | GitContribution>(null);
@@ -48,6 +49,9 @@ export default function PageInner({
     if (year) {
       newSearchParams.append("year", year);
     }
+    if (token) {
+      newSearchParams.append("api-token", token);
+    }
     const url = `/api/contribution/${provider}/${username}?${newSearchParams.toString()}`;
     // check client-side cache
 
@@ -57,7 +61,7 @@ export default function PageInner({
         const diff =
           new Date().getTime() -
           new Date(contributionStore.fetchDate).getTime();
-        if (diff < 1000 * 60 * 60 * 24) {
+        if (diff < 1000 * 60 * 60 * 24 * 2) {
           setContributionData(
             GitContribution.parse(contributionStore.contributions)
           );

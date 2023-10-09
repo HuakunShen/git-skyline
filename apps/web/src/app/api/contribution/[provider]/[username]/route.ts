@@ -12,6 +12,7 @@ export function GET(
   const provider = GitProvider.parse(params.provider) as GitProvider;
   const username = z.string().min(2).parse(params.username);
   const searchParams = request.nextUrl.searchParams;
+  const apiToken = searchParams.get("api-token");
   const yearParam = searchParams.get("year");
   const year = yearParam
     ? z
@@ -36,7 +37,10 @@ export function GET(
   //       .parse(endDateParam)
   //   : undefined;
 
-  const contributionRetriever = contributionRetrieverFactory(provider);
+  const contributionRetriever = contributionRetrieverFactory(
+    provider,
+    apiToken
+  );
   let dataFetchPromise: Promise<GitContribution | undefined>;
   if (year) {
     const cacheVal = contributionCache.get(`${provider}/${username}/${year}`);
