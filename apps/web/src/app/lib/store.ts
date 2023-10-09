@@ -7,18 +7,18 @@ const now = new Date();
 
 export type State = {
   username: string;
-  year: number;
+  year: string;
   setUsername: (username: string) => void;
-  setYear: (year: number) => void;
+  setYear: (year: string) => void;
 };
 
 export const useUserInputStore = create<State, [["zustand/persist", unknown]]>(
   persist(
     (set, get) => ({
       username: "",
-      year: now.getFullYear(),
+      year: "Recent 1 Year",
       setUsername: (username: string) => set((state) => ({ username })),
-      setYear: (year: number) => set((state) => ({ year })),
+      setYear: (year: string) => set((state) => ({ year })),
     }),
     {
       name: "user-input-store",

@@ -4,23 +4,24 @@ import { GitProvider } from "@git-skyline/common";
 import { range } from "./lib/utils";
 import { useUserInputStore } from "@/app/lib/store";
 import DefaultLayout from "@/app/components/layouts/default";
-
+import { RECENT_ONE_YEAR } from "@/app/lib/constant";
 
 export default function Home(): JSX.Element {
   const router = useRouter();
   const now = new Date();
-  const years = range(2008, now.getFullYear()).reverse();
+  const years: (number | string)[] = range(2008, now.getFullYear()).reverse();
+  years.unshift(RECENT_ONE_YEAR);
   const userInputStore = useUserInputStore();
 
   function go(): void {
     if (!userInputStore.username) {
-      // alert("Please enter a GitHub username");
       return;
     }
-
-    router.push(
-      `/contribution/${GitProvider.Enum.github}/${userInputStore.username}?year=${userInputStore.year}`
-    );
+    let url = `/contribution/${GitProvider.Enum.github}/${userInputStore.username}`;
+    if (/^\d{4}$/.test(userInputStore.year.toString())) {
+      url += `?year=${userInputStore.year}`;
+    }
+    router.push(url);
   }
 
   return (
@@ -57,7 +58,7 @@ export default function Home(): JSX.Element {
             <select
               className="select select-bordered join-item border border-secondary"
               onChange={(e) => {
-                userInputStore.setYear(parseInt(e.target.value));
+                userInputStore.setYear(e.target.value);
               }}
               value={userInputStore.year}
             >
