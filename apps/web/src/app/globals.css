@@ -16,7 +16,7 @@
   }
 }
 
-body {
+/* body {
   color: rgb(var(--foreground-rgb));
   background: rgb(10, 3, 134);
   background: linear-gradient(
@@ -26,4 +26,4 @@ body {
     rgba(46, 9, 44, 1) 86%,
     rgba(92, 15, 86, 1) 100%
   );
-}
+} */

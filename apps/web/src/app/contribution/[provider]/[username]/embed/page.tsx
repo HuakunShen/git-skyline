@@ -1,6 +1,7 @@
 import { GitProvider } from "@git-skyline/common";
 import dynamic from "next/dynamic";
 import Loading from "@/app/components/loading";
+import "@/stylesheet/transparent-bg.css";
 
 const ContributionVanilla = dynamic(
   () => import("@/app/components/contribution-vanilla"),

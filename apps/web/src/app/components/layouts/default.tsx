@@ -1,5 +1,7 @@
 import Header from "@/app/components/header";
 import Footer from "@/app/components/footer";
+import '@/stylesheet/default-bg.css'
+
 
 export default function DefaultLayout({
   children,
