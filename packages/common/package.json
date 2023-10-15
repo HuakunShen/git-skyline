@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "zod": "^3.22.4",
-    "@git-skyline/github-graphql": "*"
+    "@git-skyline/github-graphql": "workspace:*"
   },
   "scripts": {
     "build": "tsup"

@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.8.5",
-    "@git-skyline/common": "*",
-    "@git-skyline/github-graphql": "*",
+    "@git-skyline/common": "workspace:*",
+    "@git-skyline/github-graphql": "workspace:*",
     "@react-three/drei": "^9.86.3",
     "@react-three/fiber": "^8.14.5",
     "axios": "^1.5.1",
@@ -22,7 +22,7 @@
     "react": "^18",
     "react-dom": "^18",
     "three": "^0.157.0",
-    "ui": "*",
+    "ui": "workspace:*",
     "zod": "^3.22.4",
     "zustand": "^4.4.3"
   },
