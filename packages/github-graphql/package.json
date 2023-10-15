@@ -1,7 +1,9 @@
 {
   "name": "@git-skyline/github-graphql",
-  "module": "index.ts",
-  "version": "0.0.2",
+  "module": "dist/index.js",
+  "main": "dist/index.cjs",
+  "types": "dist/index.d.ts",
+  "version": "0.0.3",
   "type": "module",
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.0",
@@ -9,6 +11,7 @@
     "@graphql-codegen/typescript-graphql-request": "^4.5.9",
     "@parcel/watcher": "^2.3.0",
     "bun-types": "latest",
+    "tsup": "^7.2.0",
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
@@ -21,6 +24,7 @@
   "scripts": {
     "codegen": "graphql-codegen --config codegen.ts",
     "graphql-codegen": "graphql-codegen",
-    "build": "bun codegen"
+    "prebuild": "bun run codegen",
+    "build": "tsup"
   }
 }

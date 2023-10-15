@@ -66,3 +66,57 @@ Use a fine-grained token without any extra permission.
 > This project is still in development, and may not be stable (in terms of up time and API). If you want a stable service, consider deploying your own. I didn't spend money for cache service, so it's technically possible that the app could crash due to memory overflow if too many people are using it.
 >
 > I will consider scaling up the service in the future if necessary.
+
+## Development
+
+This project was developed with bun (https://bun.sh/).
+
+### Environment
+
+The `apps/web` package requires environment variable to properly run.
+
+Create a `.env.local` file in `apps/web` folder with the following content:
+
+```
+GITHUB_API_TOKEN=github_pat_xxxxxx
+```
+
+The `GITHUB_API_TOKEN` can be generated https://github.com/settings/tokens?type=beta (no extra permission required, just get a fine-grained access tokens).
+
+Also put the same environment variable in `packages/github-graphql` folder as graphql schema requires pulling data from GitHub API.
+
+If you don't want to create any extra file, simple use `export GITHUB_API_TOKEN=github_pat_xxxxxx` in your terminal.
+
+### Build
+
+This project uses turbo to build the monorepo.
+
+```bash
+bun run build
+```
+
+### Deploy
+
+#### Package Deployment
+
+> This is only for author of this project. If you want to deploy your own web app, you can simply deploy the `apps/web` package.
+>
+> This purpose for deploying these packages is because I want to use the same packages in my other projects.
+
+To deploy the 2 packages in `packages/github-graphql` and `packages/common`, cd into the directories and run `npm publish`.
+
+#### Web App Deployment
+
+The web app is deployed using Vercel with zero config.
+
+##### Vercel Configuration
+
+- Framework Preset: `Next.js`
+- Build Command: `cd ../.. && turbo run build`
+- Output Directory: `Next.js default`
+- Install Command: `bun install`
+- Development Command: `next`
+- Root Directory: `apps/web`
+
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FHuakunShen%2Fgit-skyline&env=GITHUB_API_TOKEN&envDescription=For%20retrieving%20github%20contribution%20and%20graphql%20schema%2C%20required%20in%20both%20building%20and%20deployment&envLink=https%3A%2F%2Fgithub.com%2Fsettings%2Ftokens%3Ftype%3Dbeta&project-name=git-skyline&repository-name=git-skyline)
