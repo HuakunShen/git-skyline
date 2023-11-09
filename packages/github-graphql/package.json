@@ -1,9 +1,7 @@
 {
   "name": "@git-skyline/github-graphql",
-  "module": "dist/index.js",
-  "main": "dist/index.cjs",
-  "types": "dist/index.d.ts",
-  "version": "0.0.3",
+  "module": "index.ts",
+  "version": "0.0.5",
   "type": "module",
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.0",
@@ -24,7 +22,10 @@
   "scripts": {
     "codegen": "graphql-codegen --config codegen.ts",
     "graphql-codegen": "graphql-codegen",
-    "prebuild": "bun run codegen",
-    "build": "tsup"
-  }
+    "build": "bun run codegen"
+  },
+  "files": [
+    "index.ts",
+    "src/gql"
+  ]
 }

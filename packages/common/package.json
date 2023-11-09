@@ -1,6 +1,6 @@
 {
   "name": "@git-skyline/common",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "source": "index.ts",
   "module": "dist/index.js",
   "main": "dist/index.cjs",
@@ -15,9 +15,10 @@
   },
   "dependencies": {
     "zod": "^3.22.4",
-    "@git-skyline/github-graphql": "workspace:*"
+    "@git-skyline/github-graphql": "latest"
   },
-  "scripts": {
-    "build": "tsup"
-  }
+  "files": [
+    "index.ts",
+    "src/"
+  ]
 }
