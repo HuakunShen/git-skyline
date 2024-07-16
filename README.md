@@ -1,6 +1,8 @@
 # Git-Skyline
 
-> The official GitHub Skyline web app https://skyline.github.com/ stops working. Keeps saying "cannot find user".
+## https://git-skyline.huakun.tech/
+
+> The official GitHub Skyline web app https://skyline.github.com/ is down.
 >
 > So I decided to make a clone of this project.
 
@@ -24,7 +26,9 @@ Feel free to send a PR for new features if you are willing to contribute.
 
 ### Embed Page
 
-You can embed git-skyline webpage into your own web page using `iframe`, without the header/footer on the page, and options to disable zoom, pan, auto-rotate.
+You can embed git-skyline webpage into your own web page using `iframe` with options to disable zoom, pan, auto-rotate, without the header/footer on the page.
+
+> https://huakunshen.com/ and https://huakun.tech are examples of the embeded git skyline.
 
 Click on the "Embed Page" button, it will take you to another web page with the 3D model alone. Put the url in an iframe.
 
