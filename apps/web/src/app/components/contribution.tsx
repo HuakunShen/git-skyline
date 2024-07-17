@@ -5,7 +5,7 @@ import { GitContribution, GitProvider } from "@git-skyline/common";
 import ContributionVanilla from "@/app/components/contribution-vanilla";
 import { useContributionsStore, useUserInputStore } from "@/app/lib/store";
 import { useSceneStore } from "@/app/lib/store";
-import { exportGLTFModel, exportSTDModel } from "@/app/lib/exporter";
+import { exportGLTFModel, exportSTLModel } from "@/app/lib/exporter";
 import Link from "next/link";
 import DefaultLayout from "@/app/components/layouts/default";
 
@@ -35,7 +35,7 @@ export default function PageInner({
 
   function downloadSTLModel() {
     if (sceneStore.scene) {
-      exportSTDModel(sceneStore.scene, `github-${username}-${year}.stl`);
+      exportSTLModel(sceneStore.scene, `github-${username}-${year}.stl`);
     }
   }
 
@@ -61,6 +61,7 @@ export default function PageInner({
           <div className="flex space-x-4">
             <Link
               href={usePathname() + "/embed?" + searchParams.toString()}
+              target="_blank"
               className="btn btn-sm btn-secondary"
             >
               Embed Page

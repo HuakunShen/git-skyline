@@ -7,7 +7,6 @@ import { useEffect } from "react";
 import { useSceneStore } from "@/app/lib/store";
 import { useSearchParams } from "next/navigation";
 
-
 function normalize(count: number, base = 4, offset = 2): number {
   switch (true) {
     case count === 0:
@@ -23,20 +22,19 @@ interface PropType {
   data: GitContribution;
 }
 
-function Skyline({ data }: PropType): JSX.Element {
+function Skyline({ data, base }: PropType & { base: boolean }): JSX.Element {
   const sceneStore = useSceneStore();
   const numRows = Math.floor(data.days.length / 7);
   const xOffset = (numRows * 12) / 2;
   const scene = useThree((state) => state.scene);
-
   const yOffset = 0;
-  // useEffect(() => {
-  //   const exporter = new GLTFExporter();
+  const baseHeight = 10;
 
-  // }, [scene]);
   useEffect(() => {
-    sceneStore.setScene(scene.clone());
-  }, [scene]);
+    setTimeout(() => {
+      sceneStore.setScene(scene.clone());
+    }, 1000);
+  }, []);
 
   return (
     <>
@@ -49,7 +47,7 @@ function Skyline({ data }: PropType): JSX.Element {
             position={[
               12 * dayData.week - xOffset,
               height / 2 + yOffset,
-              dayData.weekday * 12,
+              dayData.weekday * 12 - 12 * 3, // center the model in weekday-axis
             ]}
           >
             <boxGeometry args={[10, height, 10]} />
@@ -57,6 +55,12 @@ function Skyline({ data }: PropType): JSX.Element {
           </mesh>
         );
       })}
+      {base && (
+        <mesh position={[0, -baseHeight / 2 + yOffset, 0]}>
+          <boxGeometry args={[12 * 54, baseHeight, 12 * 8]} />
+          <meshStandardMaterial color="#ffffff" />
+        </mesh>
+      )}
     </>
   );
 }
@@ -65,6 +69,7 @@ export default function ContributionModel({ data }: PropType): JSX.Element {
   const searchParams = useSearchParams();
   const enableZoom = searchParams.get("enableZoom") === "false" ? false : true; // default to true
   const enablePan = searchParams.get("enablePan") === "false" ? false : true; // default to true
+  const enableBase = searchParams.get("base") === "true" ? true : false;
   const enableDamping =
     searchParams.get("enableDamping") === "false" ? false : true; // default to true
   const autoRotate = searchParams.get("autoRotate");
@@ -90,7 +95,7 @@ export default function ContributionModel({ data }: PropType): JSX.Element {
       <directionalLight color="#fff" position={[-100, 100, 100]} />
       <directionalLight color="#fff" position={[200, 100, 100]} />
       <directionalLight color="#fff" position={[0, 200, -200]} />
-      <Skyline data={data} />
+      <Skyline data={data} base={enableBase} />
     </Canvas>
   );
 }

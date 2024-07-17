@@ -41,7 +41,7 @@ export function exportGLTFModel(scene: Scene, filename: string) {
   );
 }
 
-export function exportSTDModel(scene: Scene, filename: string) {
+export function exportSTLModel(scene: Scene, filename: string) {
   const exporter = new STLExporter();
   const stlString = exporter.parse(scene, { binary: false });
   saveString(stlString, filename);

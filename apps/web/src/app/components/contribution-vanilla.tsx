@@ -12,7 +12,7 @@ import {
   saveArrayBuffer,
   saveString,
   exportGLTFModel,
-  exportSTDModel,
+  exportSTLModel,
 } from "@/app/lib/exporter";
 import axios from "axios";
 

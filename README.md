@@ -41,13 +41,15 @@ Click on the "Embed Page" button, it will take you to another web page with the 
 ></iframe>
 ```
 
-#### Options
+### Options
 
-The model by default enables auto-rotate, damping, panning, zoom interations. Sometimes you may not want these interactions on your web page.
+The model by default enables `auto-rotate`, `damping`, `panning`, `zoom` interations, and disable model base. Sometimes you may not want these interactions on your web page.
 
 You can simply add search params into the url
 
 e.g. `?enableZoom=false&enableZoom=false&enablePan=false&enableDamping=false&autoRotate=false&autoRotateSpeed=1`
+
+If you want to print the model, you may want to enable the model base so that the pillars are connected with the base. You can enable it by adding `&base=true` in the search params. By default, the model base is disabled to make the model looks better on a web page.
 
 See [source code](./apps/web/src/app/components/contribution-model.tsx) for how the search parameters are used.
 
@@ -67,13 +69,13 @@ Use a fine-grained token without any extra permission.
 
 ## Disclaimer
 
-> This project is still in development, and may not be stable (in terms of up time and API). If you want a stable service, consider deploying your own. I didn't spend money for cache service, so it's technically possible that the app could crash due to memory overflow if too many people are using it.
+> This project is just a small side project my website depends on. It may not be stable (in terms of up speed and API). If you want a stable service, consider deploying your own. I didn't spend money for cache service, so it's technically possible that the app could crash due to memory overflow if too many people are using it.
 >
 > I will consider scaling up the service in the future if necessary.
 
 ## Development
 
-This project was developed with bun (https://bun.sh/).
+This project was developed with pnpm workspace and turbo repo.
 
 ### Environment
 
@@ -96,7 +98,7 @@ If you don't want to create any extra file, simple use `export GITHUB_API_TOKEN=
 This project uses turbo to build the monorepo.
 
 ```bash
-bun run build
+pnpm build
 ```
 
 ### Deploy
@@ -118,9 +120,8 @@ The web app is deployed using Vercel with zero config.
 - Framework Preset: `Next.js`
 - Build Command: `cd ../.. && turbo run build`
 - Output Directory: `Next.js default`
-- Install Command: `bun install`
+- Install Command: `pnpm install`
 - Development Command: `next`
 - Root Directory: `apps/web`
-
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FHuakunShen%2Fgit-skyline&env=GITHUB_API_TOKEN&envDescription=For%20retrieving%20github%20contribution%20and%20graphql%20schema%2C%20required%20in%20both%20building%20and%20deployment&envLink=https%3A%2F%2Fgithub.com%2Fsettings%2Ftokens%3Ftype%3Dbeta&project-name=git-skyline&repository-name=git-skyline)
