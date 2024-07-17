@@ -10,9 +10,8 @@
   "devDependencies": {
     "eslint": "^8.48.0",
     "prettier": "^3.0.3",
-    "turbo": "latest"
+    "turbo": "^2.0.7"
   },
-  "packageManager": "bun@1.0.22",
   "workspaces": [
     "apps/*",
     "packages/*"

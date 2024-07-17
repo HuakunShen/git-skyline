@@ -22,7 +22,7 @@
   "scripts": {
     "codegen": "graphql-codegen --config codegen.ts",
     "graphql-codegen": "graphql-codegen",
-    "build": "bun run codegen"
+    "build": "bun --bun run codegen"
   },
   "files": [
     "index.ts",
