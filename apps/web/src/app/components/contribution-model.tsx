@@ -7,10 +7,10 @@ import { useEffect } from "react";
 import { useSceneStore } from "@/app/lib/store";
 import { useSearchParams } from "next/navigation";
 
-function normalize(count: number, base = 4, offset = 2): number {
+function normalize(count: number, minHeight = 4, base = 4, offset = 2): number {
   switch (true) {
     case count === 0:
-      return base;
+      return minHeight;
     case count > 40:
       return count;
     default:
@@ -39,7 +39,7 @@ function Skyline({ data, base }: PropType & { base: boolean }): JSX.Element {
   return (
     <>
       {data.days.map((dayData) => {
-        const height = normalize(dayData.count);
+        const height = normalize(dayData.count, base ? 0 : 4); // if model base added, set minimum height to 0
         const { year, month, day } = dayData.date;
         return (
           <mesh
@@ -56,7 +56,7 @@ function Skyline({ data, base }: PropType & { base: boolean }): JSX.Element {
         );
       })}
       {base && (
-        <mesh position={[0, -baseHeight / 2 + yOffset, 0]}>
+        <mesh position={[0, -baseHeight / 2 + yOffset + 1, 0]}>
           <boxGeometry args={[12 * 54, baseHeight, 12 * 8]} />
           <meshStandardMaterial color="#ffffff" />
         </mesh>
