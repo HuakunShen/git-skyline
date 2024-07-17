@@ -14,8 +14,9 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "zod": "^3.22.4",
-    "@git-skyline/github-graphql": "latest"
+    "@apollo/client": "^3.8.5",
+    "@git-skyline/github-graphql": "latest",
+    "zod": "^3.22.4"
   },
   "files": [
     "index.ts",
