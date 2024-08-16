@@ -3,7 +3,7 @@ import { z } from "zod";
 import { GitProvider, type GitContribution } from "@git-skyline/common";
 import { ApolloError } from "@apollo/client";
 import { contributionCache } from "@/app/lib/cache";
-import { getStarHistory } from "@hk/github-graphql";
+import { getStarHistory } from "github-graphql";
 
 export function GET(
   request: NextRequest,

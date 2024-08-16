@@ -8,9 +8,7 @@ export default function Home(): JSX.Element {
     { date: Date; count: number }[]
   >([]);
 
-  const [repoName, setRepoName] = React.useState<string>(
-    "CrossCopy/tauri-plugin-clipboard"
-  );
+  const [repoName, setRepoName] = React.useState<string>("");
 
   const username = repoName.split("/")[0];
   const repo = repoName.split("/")[1];
@@ -44,7 +42,7 @@ export default function Home(): JSX.Element {
             </button>
           </label>
         </form>
-        {starHistory.length > 0 && (
+        {/* {starHistory.length > 0 && (
           <Plot
             data={[
               {
@@ -63,7 +61,7 @@ export default function Home(): JSX.Element {
             }}
             // layout={{ width: 320, height: 240, title: "A Fancy Plot" }}
           />
-        )}
+        )} */}
       </main>
     </DefaultLayout>
   );
