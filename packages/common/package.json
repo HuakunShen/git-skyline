@@ -9,7 +9,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@hk/github-graphql": "npm:@jsr/hk__github-graphql",
+    "github-graphql": "^0.2.1",
     "graphql-request": "^7.1.0"
   }
 }

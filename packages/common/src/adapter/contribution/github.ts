@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { ContributionAdapter } from "./base";
 import { GitContribution, GitProvider, GitDayContribution } from "../../types";
-import { type ContributionCalendarWeek } from "@hk/github-graphql";
+import { type ContributionCalendarWeek } from "github-graphql";
 import { type GitHubContributionResult } from "../../api/contribution/github";
 
 export class GitHubContributionAdapter extends ContributionAdapter {

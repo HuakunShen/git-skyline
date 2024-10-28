@@ -1,7 +1,7 @@
 import { GraphQLClient } from "graphql-request";
-import { getSdk } from "@hk/github-graphql/req";
+import { getSdk } from "github-graphql/req";
 import { type ContributionAPI } from "./base";
-import type { ContributionCalendar } from "@hk/github-graphql";
+import type { ContributionCalendar } from "github-graphql";
 
 export type GitHubContributionResult = Omit<
   ContributionCalendar,
