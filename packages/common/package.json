@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "github-graphql": "^0.2.1",
-    "graphql-request": "^7.1.0"
+    "graphql-request": "^7.1.0",
+    "zod": "^3.22.4"
   }
 }
