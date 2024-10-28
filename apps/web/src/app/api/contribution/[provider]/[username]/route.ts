@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { GitProvider, type GitContribution } from "@git-skyline/common";
 import { contributionRetrieverFactory } from "../../../../lib/contribution";
-import { ApolloError } from "@apollo/client";
 import { contributionCache } from "@/app/lib/cache";
 
 export function GET(
@@ -43,12 +42,15 @@ export function GET(
   );
   let dataFetchPromise: Promise<GitContribution | undefined>;
   if (year) {
-    const cacheVal = contributionCache.get(`${provider}/${username}/${year}`);
+    const cacheVal = undefined;
+    // const cacheVal = contributionCache.get(`${provider}/${username}/${year}`);
     if (cacheVal) {
+      console.log("cache hit");
       dataFetchPromise = new Promise((resolve) => {
         resolve(cacheVal as GitContribution);
       });
     } else {
+      console.log("cache miss");
       dataFetchPromise = contributionRetriever.getContributionsByYear(
         username,
         year
@@ -76,15 +78,11 @@ export function GET(
         return new Response("Not found", { status: 404 });
       }
       contributionCache.set(`${provider}-${username}-${year}`, data);
+      console.log("totalContribution", data.totalContribution);
       return NextResponse.json(data);
     })
     .catch((err) => {
       // check if error is ApolloErrror
-
-      if (err instanceof ApolloError) {
-        return new Response(err.message, { status: 400 });
-      } else {
-        return new Response(err.message, { status: 400 });
-      }
+      return new Response(err.message, { status: 400 });
     });
 }

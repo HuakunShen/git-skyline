@@ -1,25 +1,15 @@
 {
   "name": "@git-skyline/common",
-  "version": "0.0.4",
-  "source": "index.ts",
-  "module": "dist/index.js",
-  "main": "dist/index.cjs",
-  "types": "dist/index.d.ts",
+  "module": "index.ts",
   "type": "module",
   "devDependencies": {
-    "bun-types": "latest",
-    "tsup": "^7.2.0"
+    "@types/bun": "latest"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@apollo/client": "^3.8.5",
-    "@git-skyline/github-graphql": "latest",
-    "zod": "^3.22.4"
-  },
-  "files": [
-    "index.ts",
-    "src/"
-  ]
+    "@hk/github-graphql": "npm:@jsr/hk__github-graphql",
+    "graphql-request": "^7.1.0"
+  }
 }

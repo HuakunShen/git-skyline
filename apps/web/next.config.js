@@ -1,11 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: [
-    "ui",
-    "three",
-    "@git-skyline/github-graphql",
-    "github-graphql",
-  ],
+  transpilePackages: ["ui", "three", "github-graphql"],
 };
 
 module.exports = nextConfig;

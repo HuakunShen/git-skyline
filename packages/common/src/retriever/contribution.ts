@@ -1,5 +1,5 @@
 import { ContributionAdapter } from "../adapter/contribution";
-import { ContributionAPI } from "../api";
+import { type ContributionAPI } from "../api";
 import { GitContribution } from "../types";
 
 export class ContributionRetriever {

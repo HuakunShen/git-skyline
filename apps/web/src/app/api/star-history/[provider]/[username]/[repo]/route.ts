@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { GitProvider, type GitContribution } from "@git-skyline/common";
-import { ApolloError } from "@apollo/client";
-import { contributionCache } from "@/app/lib/cache";
+import { GitProvider } from "@git-skyline/common";
 import { getStarHistory } from "github-graphql";
 
 export function GET(
@@ -20,22 +18,4 @@ export function GET(
   return getStarHistory(username, repo, token).then((starHistory) => {
     return NextResponse.json(starHistory);
   });
-
-  // return dataFetchPromise
-  //   .then((data) => {
-  //     if (!data) {
-  //       return new Response("Not found", { status: 404 });
-  //     }
-  //     contributionCache.set(`${provider}-${username}-${year}`, data);
-  //     return NextResponse.json(data);
-  //   })
-  //   .catch((err) => {
-  //     // check if error is ApolloErrror
-
-  //     if (err instanceof ApolloError) {
-  //       return new Response(err.message, { status: 400 });
-  //     } else {
-  //       return new Response(err.message, { status: 400 });
-  //     }
-  //   });
 }

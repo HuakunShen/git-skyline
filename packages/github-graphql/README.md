@@ -1,15 +1,5 @@
 # github-graphql
 
-To install dependencies:
+This package is not used by this project any more. It's now replaced by my other project https://jsr.io/@hk/github-graphql, which is a successor and superset of this this package.
 
-```bash
-bun install
-```
-
-To run:
-
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.0.4. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+This package is kept in the repo as a souvenir.
